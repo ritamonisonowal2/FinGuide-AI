@@ -1311,6 +1311,20 @@ SCREENS.forEach(id => {
   const el = document.getElementById(id);
   if (el) observer.observe(el, { attributes: true, attributeFilter: ['class'] });
 });
+
+function updateStatusTime() {
+  const now = new Date();
+  let hours = now.getHours() % 12;
+  if (hours === 0) hours = 12;
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const timeStr = `${hours}:${minutes}`;
+  document.querySelectorAll('.status-time').forEach(el => {
+    el.textContent = timeStr;
+  });
+}
+
+updateStatusTime();
+setInterval(updateStatusTime, 1000);
 </script>
 
 </body>
